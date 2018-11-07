@@ -1,0 +1,1 @@
+void bruteforce_attack(char* salt, char* hash);

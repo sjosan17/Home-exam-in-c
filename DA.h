@@ -1,0 +1,1 @@
+void dictionary_attack(char* salt, char* hash);
