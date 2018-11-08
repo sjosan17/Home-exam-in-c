@@ -9,15 +9,15 @@
 
 // Avoid having newline be in the guess word
 void format(char *word){
- int len_word = strlen(word);
+ int length_word = strlen(word);
 
- if(word[len_word-1] == '\n'){
-    word[len_word-1] = '\0';
+ if(word[length_word-1] == '\n'){
+    word[length_word-1] = '\0';
  }
 }
 
 // The dictionary.txt has newline at every word.
-int getnumwords(FILE *file){
+int getlines(FILE *file){
     if(file==NULL) {
         return -1;
     }
@@ -43,7 +43,7 @@ void dictionary_attack(char* salt, char* hash) {
         printf("Could not open the dictionary file.\n");   
         exit(-1);   
     }
-    int size = getnumwords(fp); // Number of words in dictionary.txt
+    int size = getlines(fp); // Number of words in dictionary.txt
     if(fseek(fp,0,SEEK_SET)==-1)    {
         return;    //seek error handling
     }
@@ -58,7 +58,6 @@ void dictionary_attack(char* salt, char* hash) {
                 format(word);
                 if(found==1)  {
                     fclose(fp);
-                    memset(word, 0, 39); // Null out word
                     exit(0);
                 }
                 if(i%1000 == 0){
@@ -76,7 +75,6 @@ void dictionary_attack(char* salt, char* hash) {
     if(found==0) {
         printf("\nFailed with dictionary attack, continue with bruteforce attack:\n");
         bruteforce_attack(salt, hash);
-        memset(word, 0, 39); // Null out word
         return;
     }
     return;

@@ -1,5 +1,5 @@
 /**
- *  Password cracker with both dictionary attack and bruteforce attack
+ *  Main stores the salt and hash, and start the cracker functions chain.
  *  Written by: Sander Sjøthun
  *  Date: 09.11.2018
  * */ 
@@ -14,9 +14,9 @@ int main(int argc, char* argv[]) {
         printf("Usage: ./crack 'hash'\n");
         exit(-1);
     }
-    char hash[35]; // 34 = The length of the hash.
+    char hash[35]; // 35 = The length of the hash.
     char salt[13];
-    memset(hash, 0, 34+1);
+    memset(hash, 0, 34+1); // The +1 is for '\0'
     memset(salt, 0, 12+1);
     memcpy(hash,argv[1],34*sizeof(char));
     strncpy(salt,hash,12*sizeof(char));
